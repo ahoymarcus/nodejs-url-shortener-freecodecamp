@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const bodyParser = require('body-parser');
+const dns = require('dns');
+
 
 
 
@@ -30,22 +32,77 @@ app.get('/api/hello', function(req, res) {
 });
 
 
+const links = [];
+let id = 0;
+
+// 8'11''
+
 
 app.post("/api/shorturl", function(req, res) {
-	console.log(req.body);
+	//console.log(req);
+	// console.log(req.body);
 	
-	res.json({
-		"original_url" "original_url",
-		"short_url": "short_url"
+	// Atenção: veja a var url na propriedade name de input type="text"
+	const { url } = req.body;
+	
+	console.log(url);
+	
+	const noHTTPUrl = url.replace(/^https?:\/\//, '');
+	
+	console.log(url);
+
+	
+	// check if this url is valid
+	dns.lookup(noHTTPUrl, function (err, address, family) {
+		console.log('err', err);
+		console.log('address', address);
+		console.log('family', family);
+		
+		if (err) {
+			return res.json({
+				error: 'invalid url'
+			});
+		} else {
+			id++;
+			
+			// create a new entry for the arr
+			const newShortURL = {
+				original_url: ur,
+				short_url: id
+			};
+			
+			links.push(newShortURL);
+			
+			return res.json(newShortURL);
+		}
 	});
+	
+	// dns.lookup(host, cb); 
+	
+	
+	// res.json({
+		// "original_url": url,
+		// "short_url": "short_url"
+	// });
 	
 	// res.json({ error: 'invalid url' });
 });
 
 
 
-app.get("/api/shorturl/:shorturl", function(req, res) {
+app.get("/api/shorturl/:id", function(req, res) {
+	const { id } = req.params;
 	
+	const shortURL = links.find(link => link.short_url === id);
+	
+	
+	if (shortURL) {
+		return res.redirect(shortURL.original_url);
+	} else {
+		return res.json({
+			error: 'No short url'
+		});
+	}
 });
 
 

@@ -17,6 +17,7 @@ Dependências:
 - Dotenv
 - Express-JS
 - Body-parser
+- Dns
 - Cors
 - Nodemon
 
