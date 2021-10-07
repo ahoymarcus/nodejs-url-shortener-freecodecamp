@@ -1,7 +1,7 @@
-# Request Header Parser Microservice - Freecodecamp.org
+# URL Shortener Microservice - Freecodecamp.org
 
 
-Segundo desafio da série para a certificação **Back End Development and APIs**, com o objetivo de produzir uma aplicação backend que faz o parse da requisição e retornar informações da aplicação cliente.[^1].
+Terceiro desafio da série para a certificação **Back End Development and APIs**, com o objetivo de produzir uma aplicação backend que possa receber uma requisição POST com um endereço de URL e devolver uma referência curta para ele, além de redirecionar uma requisição para a URL original quando passada a requisição GET com a versão curta.[^1].
 
 <br />
 
@@ -26,21 +26,21 @@ Dependências:
 <br />
 
 ### Timestamp Microservice App home page:          
-![Header Parser Microservice App home page](/public/images/header-parser-microservice-home-page.png)
+![Header Parser Microservice App home page](/public/images/)
 
 
 
 <br />
 
 ### Header Parser Microservice App rodando na plataforma Replit.com:          
-![Header Parser Microservice App rodando na plataforma Replit.com](/public/images/header-parser-microservice-rodando-no-Replit.png)
+![Header Parser Microservice App rodando na plataforma Replit.com](/public/images/)
 
 
 
 <br />
 
 ### Recebendo informações sobre a aplicação cliente na requisição:          
-![Recebendo informações sobre a aplicação cliente na requisição](/public/images/recebendo-info-app-cliente-na-requisição.png)
+![Recebendo informações sobre a aplicação cliente na requisição](/public/images/)
 
 
 
@@ -48,7 +48,7 @@ Dependências:
 <br />
 
 ### Resultado final do projeto em Freecodecamp.org:               
-![Resultado final do projeto em Freecodecamp.org](/public/images/header-parser-microservice-freecodecamp.png)
+![Resultado final do projeto em Freecodecamp.org](/public/images/)
 
 
 
