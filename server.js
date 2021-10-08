@@ -44,40 +44,32 @@ app.post("/api/shorturl", function(req, res) {
 	
 	// Atenção: a propriedade url é passada em body
 	const { url } = req.body;
-	console.log('Passed URL: ', url);
 	
-	let noHTTPUrl = url.replace(/^https?:\/\//, '');
-	
-	noHTTPUrl = noHTTPUrl.replace(/\/$/, '');
-	
-	console.log('Reformed URL: ', noHTTPUrl);
+	console.log(url);  
 	
 	
+	// dns.lookup(host, cb);
 	
-	// Check if the url is valid
-	dns.lookup(noHTTPUrl, function(err, addresses, family) {
-		console.log('err', err);
-		console.log('addresses', addresses);
-		console.log('family', family);
+	
+	console.log('testing.....');
+	
+	if (url) {
+		id++;
 		
-		if (err) {
-			return res.json({
-				error: 'invalid url'
-			});
-		} else {
-			id++;
+		let newUrl = {
+			"original_url": url,
+			"short_url": id
+		};
 		
-			let newUrl = {
-				original_url : url,
-				short_url : id
-			};
-			
-			urlArr.push(newUrl);
-			console.log(urlArr);
-			
-			res.json(newUrl);
-		}
-	});
+		urlArr.push(newUrl);
+		console.log(urlArr);
+		
+		res.json(newUrl);
+	} else {
+		res.json({ error: 'invalid url' });
+	}
+
+
 
 });
 
@@ -87,7 +79,7 @@ app.get("/api/shorturl/:id", function(req, res) {
 	const { id } = req.params;
 	
 	console.log(id);
-	console.log('id typeof', typeof id);
+	console.log(typeof id);
 	
 	const linkToRedirect = urlArr.find(url => url.short_url === parseInt(id));
 	console.log(linkToRedirect);
@@ -98,7 +90,7 @@ app.get("/api/shorturl/:id", function(req, res) {
 	res.json({
 		"error": "Id not found"
 	});
-});  
+});
 
 
 
