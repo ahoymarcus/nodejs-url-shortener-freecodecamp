@@ -16,6 +16,7 @@ app.use(cors());
 
 app.use('/public', express.static(`${process.cwd()}/public`));
 
+// bodyParser configuration
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
@@ -32,60 +33,42 @@ app.get('/api/hello', function(req, res) {
 });
 
 
-const links = [];
+const urlArr = [];
 let id = 0;
 
-// 8'11''
-
-
 app.post("/api/shorturl", function(req, res) {
-	//console.log(req);
-	// console.log(req.body);
+	//console.log(Object.keys(req));
+	console.log(req.body);
+	// Output:
+	// [Object: null prototype] { url: 'https://www.freecodecamp.org/' }
 	
-	// Atenção: veja a var url na propriedade name de input type="text"
+	// Atenção: a propriedade url é passada em body
 	const { url } = req.body;
 	
 	console.log(url);
 	
-	const noHTTPUrl = url.replace(/^https?:\/\//, '');
 	
-	console.log(url);
-
+	// dns.lookup(host, cb);
 	
-	// check if this url is valid
-	dns.lookup(noHTTPUrl, function (err, address, family) {
-		console.log('err', err);
-		console.log('address', address);
-		console.log('family', family);
+	
+	
+	
+	if (url) {
+		id++;
 		
-		if (err) {
-			return res.json({
-				error: 'invalid url'
-			});
-		} else {
-			id++;
-			
-			// create a new entry for the arr
-			const newShortURL = {
-				original_url: ur,
-				short_url: id
-			};
-			
-			links.push(newShortURL);
-			
-			return res.json(newShortURL);
-		}
-	});
-	
-	// dns.lookup(host, cb); 
-	
-	
-	// res.json({
-		// "original_url": url,
-		// "short_url": "short_url"
-	// });
-	
-	// res.json({ error: 'invalid url' });
+		let newUrl = {
+			"original_url": url,
+			"short_url": id
+		};
+		
+		urlArr.push(newUrl);
+		console.log(urlArr);
+		
+		res.json(newUrl);
+	} else {
+		res.json({ error: 'invalid url' });
+	}
+
 });
 
 
@@ -93,16 +76,18 @@ app.post("/api/shorturl", function(req, res) {
 app.get("/api/shorturl/:id", function(req, res) {
 	const { id } = req.params;
 	
-	const shortURL = links.find(link => link.short_url === id);
+	console.log(id);
+	console.log(typeof id);
 	
+	const linkToRedirect = urlArr.find(url => url.short_url === parseInt(id));
+	console.log(linkToRedirect);
 	
-	if (shortURL) {
-		return res.redirect(shortURL.original_url);
-	} else {
-		return res.json({
-			error: 'No short url'
-		});
+	if (linkToRedirect) {
+		res.redirect(linkToRedirect.original_url);
 	}
+	res.json({
+		"error": "Id not found"
+	});
 });
 
 
