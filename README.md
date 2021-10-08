@@ -26,22 +26,22 @@ Dependências:
 
 <br />
 
-### Timestamp Microservice App home page:          
-![Header Parser Microservice App home page](/public/images/)
+### URL Shortener Microservice App home page:          
+![URL Shortener Microservice App home page](/public/images/url-shortener-microservice-home-page.png)
 
 
 
 <br />
 
-### Header Parser Microservice App rodando na plataforma Replit.com:          
-![Header Parser Microservice App rodando na plataforma Replit.com](/public/images/)
+### Postando uma URL no App e recebendo um id de referência para ela:          
+![Postando uma URL no App e recebendo um id de referência para ela](/public/images/posting-a-url-at-the-app.png)
 
 
 
 <br />
 
-### Recebendo informações sobre a aplicação cliente na requisição:          
-![Recebendo informações sobre a aplicação cliente na requisição](/public/images/)
+### Redirecionando para uma URL original usando o seu Id de referência:          
+![Redirecionando para uma URL original usando o seu Id de referência](/public/images/redirecting-to-original-url-using-its-id.png)
 
 
 
