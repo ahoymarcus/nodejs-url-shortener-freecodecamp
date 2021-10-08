@@ -48,6 +48,15 @@ Dependências:
 
 <br />
 
+
+### URL Shortener Microservice App rodando na plataforma Replit.com:          
+![URL Shortener Microservice App rodando na plataforma Replit.com](/public/images/url-shortener-microservice-rodando-no-Replit.png)
+
+
+
+
+<br />
+
 ### Resultado final do projeto em Freecodecamp.org:               
 ![Resultado final do projeto em Freecodecamp.org](/public/images/url-shortener-microservice-freecodecamp.png)
 
