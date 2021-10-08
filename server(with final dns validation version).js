@@ -46,6 +46,10 @@ app.post("/api/shorturl", function(req, res) {
 	const { url } = req.body;
 	console.log('Passed URL: ', url);
 	
+	if (!url) {
+    return res.json({ error: 'invalid url' });
+  }
+	
 	let noHTTPUrl = url.replace(/^https?:\/\//, '');
 	
 	noHTTPUrl = noHTTPUrl.replace(/\/$/, '');
