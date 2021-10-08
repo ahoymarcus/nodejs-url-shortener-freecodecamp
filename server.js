@@ -43,37 +43,44 @@ app.post("/api/shorturl", function(req, res) {
 	// [Object: null prototype] { url: 'https://www.freecodecamp.org/' }
 	
 	// Atenção: a propriedade url é passada em body
-	const { url } = req.body;
+	const urlRequest = req.body.url;
 	
-	console.log(url);  
+	console.log(urlRequest);  
 	
-	if (!url) {
-    return res.json({ error: 'invalid url' });
-  }
+	// if (!urlRequest) {
+    // return res.json({ error: 'invalid url' });
+  // }
+	
+	// retrieve the hostname removing from the url (the section between https:// and relative paths)
+  const hostname = urlRequest
+    .replace(/http[s]?\:\/\//, '')
+    .replace(/\/(.+)?/, '');
 	
 	
-	// dns.lookup(host, cb);
-	
-	
-	console.log('testing.....');
-	
-	if (url) {
-		id++;
+	dns.lookup(hostname, function(lookupErr, addresses) {
 		
-		let newUrl = {
-			"original_url": url,
-			"short_url": id
-		};
+		if (lookupErr) {
+			console.log('lookup() error');
+		}
 		
-		urlArr.push(newUrl);
-		console.log(urlArr);
+		// lookup() returns either _undefined_ or _an IP address_
+    // if undefined , send a JSON object detailing the invalid nature of the request
+		if (!addresses) {
+			res.json({ error: 'invalid url' });
+		} else {
+			id++;
 		
-		res.json(newUrl);
-	} else {
-		res.json({ error: 'invalid url' });
-	}
-
-
+			let newUrl = {
+				"original_url": urlRequest,
+				"short_url": id
+			};
+			
+			urlArr.push(newUrl);
+			console.log(urlArr);
+			
+			res.json(newUrl);
+		}
+	});
 
 });
 
