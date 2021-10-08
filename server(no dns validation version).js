@@ -43,40 +43,31 @@ app.post("/api/shorturl", function(req, res) {
 	// [Object: null prototype] { url: 'https://www.freecodecamp.org/' }
 	
 	// Atenção: a propriedade url é passada em body
-	let { url } = req.body;
-	console.log('Passed URL: ', url);
+	const { url } = req.body;
 	
-	url = url.replace(/^https?:\/\//, '');
-	
-	
-	console.log('Reformed URL: ', url);
+	console.log(url);
 	
 	
+	// dns.lookup(host, cb);
 	
-	// Check if the url is valid
-	dns.lookup(url, function(err, addresses, family) {
-		console.log('err', err);
-		console.log('addresses', addresses);
-		console.log('family', family);
+	
+	
+	
+	if (url) {
+		id++;
 		
-		if (err) {
-			return res.json({
-				error: 'invalid url'
-			});
-		} else {
-			id++;
+		let newUrl = {
+			"original_url": url,
+			"short_url": id
+		};
 		
-			let newUrl = {
-				"original_url": url,
-				"short_url": id
-			};
-			
-			urlArr.push(newUrl);
-			console.log(urlArr);
-			
-			res.json(newUrl);
-		}
-	});
+		urlArr.push(newUrl);
+		console.log(urlArr);
+		
+		res.json(newUrl);
+	} else {
+		res.json({ error: 'invalid url' });
+	}
 
 });
 
